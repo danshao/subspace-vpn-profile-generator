@@ -50,7 +50,7 @@
 				<integer>0</integer>
 			</dict>
 			<key>UserDefinedName</key>
-			<string>SubSpace VPN</string>
+			<string>Subspace VPN</string>
 			<key>VPNType</key>
 			<string>L2TP</string>
 		</dict>
