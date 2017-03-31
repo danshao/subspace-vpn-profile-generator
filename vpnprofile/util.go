@@ -211,7 +211,7 @@ const AppleTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
 	"                <integer>0</integer>\n" +
 	"            </dict>\n" +
 	"            <key>UserDefinedName</key>\n" +
-	"            <string>Carter Test on Device</string>\n" +
+	"            <string>Subspace VPN</string>\n" +
 	"            <key>VPNType</key>\n" +
 	"            <string>L2TP</string>\n" +
 	"        </dict>\n" +
