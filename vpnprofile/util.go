@@ -217,7 +217,7 @@ const AppleTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
 	"        </dict>\n" +
 	"    </array>\n" +
 	"    <key>PayloadDisplayName</key>\n" +
-	"    <string>Carter VPN Test</string>\n" +
+	"    <string>Subspace VPN</string>\n" +
 	"    <key>PayloadIdentifier</key>\n" +
 	"    <string>cateyesde-macbook-pro.local.9A7D5D7B-525B-4D30-AD87-C3EA25419C63</string>\n" +
 	"    <key>PayloadRemovalDisallowed</key>\n" +
