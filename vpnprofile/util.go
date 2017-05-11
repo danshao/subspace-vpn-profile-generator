@@ -3,6 +3,7 @@ package vpnprofile
 import (
 	"bytes"
 	"text/template"
+	"fmt"
 )
 
 // Enum for platform
@@ -28,14 +29,19 @@ type Connection struct {
 	User User
 }
 
-func (vpn Server) GenerateProfile(platform Platform, user User) string {
+type Metadata struct {
+	Identifier string
+	Description string
+}
+
+func (vpn Server) GenerateProfile(platform Platform, user User, metadata Metadata) string {
 	connection := Connection{vpn, user}
 	var profile Profile
 	switch platform {
 	case WINDOWS:
 		profile = WindowsProfile{connection}
 	case APPLE:
-		profile = AppleProfile{connection}
+		profile = AppleProfile{connection, metadata.Identifier, metadata.Description}
 	default:
 		panic("Support only APPLE or WINDOWS.")
 	}
@@ -54,6 +60,10 @@ func (vpn Server) GenerateProfile(platform Platform, user User) string {
 	}
 
 	return doc.String()
+}
+
+func FormatMobileConfigIdentifier(subspaceId string, hub string, userId int, profileId int) string {
+	return fmt.Sprintf("subspace.%s.%s.%d.%d", subspaceId, hub, userId, profileId)
 }
 
 const WindowsTemplate = "[VPN Connection]\n" +
@@ -192,7 +202,7 @@ const AppleTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
 	"                <string>{{.Host}}</string>\n" +
 	"            </dict>\n" +
 	"            <key>PayloadDescription</key>\n" +
-	"            <string>配置 VPN 設定</string>\n" +
+	"            <string>VPN connection setting</string>\n" +
 	"            <key>PayloadDisplayName</key>\n" +
 	"            <string>VPN</string>\n" +
 	"            <key>PayloadIdentifier</key>\n" +
@@ -211,15 +221,15 @@ const AppleTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
 	"                <integer>0</integer>\n" +
 	"            </dict>\n" +
 	"            <key>UserDefinedName</key>\n" +
-	"            <string>Subspace VPN</string>\n" +
+	"            <string>{{.Description}}</string>\n" +
 	"            <key>VPNType</key>\n" +
 	"            <string>L2TP</string>\n" +
 	"        </dict>\n" +
 	"    </array>\n" +
 	"    <key>PayloadDisplayName</key>\n" +
-	"    <string>Subspace VPN</string>\n" +
+	"    <string>{{.Description}}</string>\n" +
 	"    <key>PayloadIdentifier</key>\n" +
-	"    <string>cateyesde-macbook-pro.local.9A7D5D7B-525B-4D30-AD87-C3EA25419C63</string>\n" +
+	"    <string>{{.Identifier}}</string>\n" +
 	"    <key>PayloadRemovalDisallowed</key>\n" +
 	"    <false/>\n" +
 	"    <key>PayloadType</key>\n" +

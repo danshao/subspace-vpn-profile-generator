@@ -6,12 +6,23 @@ import (
 )
 
 func main() {
-	server := vpnprofile.Server{"my.vpn.host", "ecowork"}
-	user := vpnprofile.User{"carter", "1234"}
+	id := vpnprofile.FormatMobileConfigIdentifier(
+		"d3f8cc82-1d5c-4b5f-9629-6cbb2e577f65",
+		"subspace",
+		1,
+		1,
+	)
 
-	windowsProfile := server.GenerateProfile(vpnprofile.WINDOWS, user)
+	descApple := "Subspace VPN"
+
+	metadata := vpnprofile.Metadata{id, descApple}
+
+	server := vpnprofile.Server{"54.204.175.254", "subspace"}
+	user := vpnprofile.User{"1_1493786663608955659", "PwmWUdwdRN"}
+
+	windowsProfile := server.GenerateProfile(vpnprofile.WINDOWS, user, metadata)
 	fmt.Println(windowsProfile)
 
-	appleProfile := server.GenerateProfile(vpnprofile.APPLE, user)
+	appleProfile := server.GenerateProfile(vpnprofile.APPLE, user, metadata)
 	fmt.Println(appleProfile)
 }

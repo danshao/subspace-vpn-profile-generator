@@ -37,14 +37,21 @@ func (profile WindowsProfile) Password() string {
 	return profile.Connection.User.Password
 }
 
+
 // Apple profile implementation
 type AppleProfile struct {
 	Connection
+	Id string
+	Desc string
 }
 
 func (profile AppleProfile) TemplatePath() string {
 	// return "./vpnprofile/apple-vpn-settings.template"
 	return AppleTemplate
+}
+
+func (profile AppleProfile) Identifier() string {
+	return profile.Id
 }
 
 func (profile AppleProfile) Host() string {
@@ -61,4 +68,8 @@ func (profile AppleProfile) Username() string {
 
 func (profile AppleProfile) Password() string {
 	return profile.Connection.User.Password
+}
+
+func (profile AppleProfile) Description() string {
+	return profile.Desc
 }
