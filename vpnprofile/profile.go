@@ -1,6 +1,10 @@
 package vpnprofile
 
-import "encoding/base64"
+import (
+	"encoding/base64"
+	"strconv"
+	"time"
+)
 
 // Interface for WindowsProfile profile and AppleProfile profile.
 type Profile interface {
@@ -35,6 +39,11 @@ func (profile WindowsProfile) Username() string {
 
 func (profile WindowsProfile) Password() string {
 	return profile.Connection.User.Password
+}
+
+// See https://msdn.microsoft.com/en-us/library/ee791258.aspx
+func (profile WindowsProfile) DialParamsUID() string {
+	return strconv.FormatInt(time.Now().Unix(), 10)
 }
 
 
