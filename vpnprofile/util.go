@@ -210,7 +210,7 @@ const AppleTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
 	"            <key>PayloadType</key>\n" +
 	"            <string>com.apple.vpn.managed</string>\n" +
 	"            <key>PayloadUUID</key>\n" +
-	"            <string>763C9CD6-C7E8-460C-AB56-30C54077C70B</string>\n" +
+	"            <string>{{.Identifier}}</string>\n" +
 	"            <key>PayloadVersion</key>\n" +
 	"            <integer>1</integer>\n" +
 	"            <key>Proxies</key>\n" +
